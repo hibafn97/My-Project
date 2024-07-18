@@ -127,6 +127,12 @@ class Cities:# using adjacency list
       print(i,end=": ")
       self.graph[i].printLL()
   
+  def searchCity(city):
+    for i in range(len(self.graph)):
+      if i == city:
+        return True
+    return False
+  
 
 
 def startMenu():
@@ -175,7 +181,7 @@ def citiesMenu():
 
   
 C = Cities(0)
-D = Drivers
+D = Drivers()
 startMenu()
   
 # D=Drivers()
