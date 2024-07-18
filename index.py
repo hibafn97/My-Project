@@ -103,6 +103,11 @@ class Drivers:
   def printDrivers(self):
     for k,v in self.drivers.items():
       print(f"{k} , {v[0]} , {v[1]}")
+
+  def printDriversOfCity(self,city):
+    for k,v in self.drivers.items():
+      if v[1] == city:
+        print("v[1] ,")
   
 
 class Cities:# using adjacency list
@@ -127,12 +132,16 @@ class Cities:# using adjacency list
       print(i,end=": ")
       self.graph[i].printLL()
   
-  def searchCity(city):
+  def searchCity(self,city):
     for i in range(len(self.graph)):
       if i == city:
         return True
     return False
   
+  def printNeighboringCities(self,city):
+    for i in range(len(self.graph)):
+      if i == city:
+        i.printLL()
 
 
 def startMenu():
@@ -182,11 +191,16 @@ def citiesMenu():
   
 C = Cities(0)
 D = Drivers()
+
+C.addEdge("beirut","tyre")
+C.addEdge("akkar","beirut")
+
+
+D=Drivers()
+D.addDriver("hiba","beirut")
+D.addDriver("mohammad","akkar")
+D.addDriver("Ali","tyre")
+D.addDriver("sami","beirut")
+D.printDrivers()
+
 startMenu()
-  
-# D=Drivers()
-# D.addDriver("hiba","beirut")
-# D.addDriver("mohammad","akkar")
-# D.addDriver("Ali","tyre")
-# D.addDriver("sami","beirut")
-# D.printDrivers()
