@@ -2,7 +2,11 @@ class Drivers:
   def __init__(self):
     self.drivers = {}
 
-  
+  def addDriver(self,name,city):
+    ids=[0]
+    ids = ids + list(self.drivers.keys())
+    id=max(ids)+1
+    self.drivers[id]=[name,city]
 
   def printDrivers(self):
     for k,v in self.drivers.items():
@@ -47,18 +51,18 @@ def startMenu():
   else:
     startMenu()
 
-def driversMenu():
-  i = int(input("1. To view all the drivers\n2. To add a driver\n3. To go back to main menu\n"))
+
+
+  
 
 
 def citiesMenu():
   i = int(input("1. Show cities\n2. Print neighboring cities\n3. Print Drivers delivering to city\n"))
   
   
-drivers = {"ID0010":["Ali Tarhini","Beirut"],"ID002":["Salim Mhanna","Saida"],"ID003":["Sara jaber","Batroun"]}
 C = Cities(500)
-
-#startMenu()
+D = Drivers
+startMenu()
   
 # D=Drivers()
 # D.addDriver("hiba","beirut")
