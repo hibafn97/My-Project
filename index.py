@@ -51,7 +51,18 @@ def startMenu():
   else:
     startMenu()
 
-
+def driversMenu():
+  i = int(input("1. To view all the drivers\n2. To add a driver\n3. To go back to main menu\n"))
+  if i==1:
+    D.printDrivers()
+  elif i==2:
+    name = input("Enter the name of the driver:")
+    city = input("Enter the name of his starting city:")
+    D.addDriver(name,city)
+  elif i==3:
+    startMenu()
+  else:
+    driversMenu()
 
   
 
