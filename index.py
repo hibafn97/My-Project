@@ -40,6 +40,13 @@ class AdjacencyMatrix:
   def showCities(self):
     print(self.cities)
 
+  def printNeighboringCities(self,city):
+    i=self.cities.index(city)
+    for j in range(len(self.graph[i])):
+      if  self.graph[i][j]== 1:
+        k=self.cities[j]
+        print(k)
+
   
 
 
@@ -48,7 +55,7 @@ class Drivers:
     self.drivers = {}
 
   #ids initialized by 0 to avoid errors when using the max function
-  def addDriver(self,name,city):
+  def addDriver(self,name,city,C):
     if C.searchCity(city):
       ids=[0]
       #concatinating the list with the keys
@@ -68,44 +75,12 @@ class Drivers:
     for k,v in self.drivers.items():
       print(f"{k} , {v[0]} , {v[1]}")
 
-  def printDriversOfCity(self,city):
-    for k,v in self.drivers.items():
-      if v[1] == city:
-        print("v[1] ,")
+  def printDriversOfCity(self,city,C):
+    for v in self.drivers.values():
+      if v[1]==city:
+        print(v[0])
+        
   
-
-#class Cities:# using adjacency list
-# class AdjacencyList:
-  # def __init__(self,V):
-  #   self.cities=[]
-  #   for i in range(V):
-  #     self.graph.append()
-
-  # def addEdge(self):
-  #   #O(V)
-  #   if self.graph[i].search(j):
-  #     return None
-  #   else:
-  #     self.graph[i].addToHead(j)
-  # #O(V)
-  # def deleteEdge(self,i,j):
-  #   self.graph[i].removeNode(j)
-
-  # def printGraph(self):
-  #   for i in range(len(self.graph)):
-  #     print(i,end=": ")
-  #     self.graph[i].printLL()
-  
-  # def searchCity(self,city):
-  #   for i in range(len(self.graph)):
-  #     if i == city:
-  #       return True
-  #   return False
-  
-  # def printNeighboringCities(self,city):
-  #   for i in range(len(self.graph)):
-  #     if i == city:
-  #       i.printLL()
 
 
 def startMenu():
@@ -126,7 +101,7 @@ def driversMenu():
   elif i==2:
     name = input("Enter the name of the driver:")
     city = input("Enter the name of his starting city:")
-    D.addDriver(name,city)
+    D.addDriver(name,city,C)
   elif i==3:
     startMenu()
   else:
@@ -148,12 +123,11 @@ def citiesMenu():
   elif i==3:
     city=input("Enter a city name:")
     if C.searchCity(city):
-      D.printDriversOfCity(city)
+      D.printDriversOfCity(city,C)
     else:
       print("This city dose not exist")
   else:
-    startMenu()
-
+    citiesMenu()
   
 # C = Cities(100)
 # D = Drivers()
@@ -161,20 +135,24 @@ def citiesMenu():
 # C.addEdge("beirut","tyre")
 # C.addEdge("akkar","beirut")
 
-
-# D=Drivers()
-# D.addDriver("hiba","beirut")
-# D.addDriver("mohammad","akkar")
-# D.addDriver("Ali","tyre")
-# D.addDriver("sami","beirut")
-# D.printDrivers()
-
-# startMenu()
-
 C=AdjacencyMatrix(["Beirut","Saida","Tyre"])
+
+D=Drivers()
+D.addDriver("hiba","Beirut",C)
+D.addDriver("mohammad","Saida",C)
+D.addDriver("Ali","Tyre",C)
+D.addDriver("Sami","Beirut",C)
+D.printDrivers()
+
+
+
+
 #m.printGraph()
 C.addEdge(0,1)
 C.addEdge(1,2)
 
+
 C.addCity("Akkar")
 C.printGraph()
+
+startMenu()
