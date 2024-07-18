@@ -126,6 +126,7 @@ class Cities:# using adjacency list
     for i in range(len(self.graph)):
       print(i,end=": ")
       self.graph[i].printLL()
+  
 
 
 def startMenu():
@@ -157,9 +158,23 @@ def driversMenu():
 
 def citiesMenu():
   i = int(input("1. Show cities\n2. Print neighboring cities\n3. Print Drivers delivering to city\n"))
+  if i==1:
+    C.printGraph()
+  elif i==2:
+    city=input("Enter a city name:")
+    if C.searchCity(city):
+      C.printNeighboringCities(city)
+    else:
+      print("This city dose not exist")
+  elif i==3:
+    city=input("Enter a city name:")
+    if C.searchCity(city):
+      D.printDriversOfCity(city)
+    else:
+      print("This city dose not exist")
+
   
-  
-C = Cities(500)
+C = Cities(0)
 D = Drivers
 startMenu()
   
