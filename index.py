@@ -1,9 +1,49 @@
+class Node:
+
+  def __init__(self, info, next):
+    self.info = info
+    self.next = next
+
+
+class LinkedList:
+
+  def __init__(self):
+    self.head = None
+    self.tail = None
+    self.size = 0  #how many element I have in my LL
+
+  def addHead(self, info):  #O(1)
+    n = Node(info, None)
+
+    if self.size == 0:  # LL is empty
+      self.head = n
+      self.tail = n
+      self.size += 1
+    else:
+      n.next = self.head
+      self.head = n
+      self.size += 1
+
+  def addTail(self, info):  #O(1)
+    n = Node(info, None)
+    if self.size == 0:  # LL is empty
+      self.head = n
+      self.tail = n
+      self.size += 1
+    else:
+      self.tail.next = n
+      self.tail = n
+      self.size += 1
+
 class Drivers:
   def __init__(self):
     self.drivers = {}
 
+  #ids initialized by 0 to avoid errors when using the max function
   def addDriver(self,name,city):
+    
     ids=[0]
+    #concatinating the list with the keys
     ids = ids + list(self.drivers.keys())
     id=max(ids)+1
     self.drivers[id]=[name,city]
@@ -13,31 +53,27 @@ class Drivers:
       print(f"{k} , {v[0]} , {v[1]}")
   
 
-class Cities:# using adjacency matrix
-
-  def __init__(self, V):
-    self.graph = []
+class Cities:# using adjacency list
+# class AdjacencyList:
+  def __init__(self,V):
+    self.graph=[]
     for i in range(V):
-      self.graph.append([0] * V)
+      self.graph.append(LinkedList())
+
+  def addEdge(self,i,j):
+    #O(V)
+    if self.graph[i].search(j):
+      return None
+    else:
+      self.graph[i].addHead(j)
+  #O(V)
+  def deleteEdge(self,i,j):
+    self.graph[i].removeNode(j)
 
   def printGraph(self):
-    print("   ", end="")
     for i in range(len(self.graph)):
-      print(i, end="   ")
-    print()
-    for i in range(len(self.graph)):
-      print(str(i) + ": ", self.graph[i])
-    print()
-
-  #O(1)
-  def addEdge(self, i, j):
-    self.graph[i][j] = 1
-    self.graph[j][i] = 1
-
-  #O(1)
-  def deleteEdge(self, i, j):
-    self.graph[i][j] = 0
-    self.graph[j][i] = 0
+      print(i,end=": ")
+      self.graph[i].printLL()
 
 
 def startMenu():
