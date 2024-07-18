@@ -1,3 +1,6 @@
+from ast import And
+
+
 class AdjacencyMatrix:
 
   def __init__(self, cities):
@@ -25,6 +28,18 @@ class AdjacencyMatrix:
     self.graph[i][j] = 0
     self.graph[j][i] = 0
 
+  def addCity(self,city):
+    self.cities.append(city)
+    for i in self.graph:
+      i.append(0)
+    self.graph.append([0]*(len(self.graph)+1))
+
+  def searchCity(self,city):
+    return city in self.cities
+  
+  def showCities(self):
+    print(self.cities)
+
   
 
 
@@ -41,7 +56,13 @@ class Drivers:
       id=max(ids)+1
       self.drivers[id]=[name,city]
     else:
-      C.addEdge(city,None)
+      C.addCity(city)
+      ids=[0]
+      #concatinating the list with the keys
+      ids = ids + list(self.drivers.keys())
+      id=max(ids)+1
+      self.drivers[id]=[name,city]
+
 
   def printDrivers(self):
     for k,v in self.drivers.items():
@@ -117,7 +138,7 @@ def driversMenu():
 def citiesMenu():
   i = int(input("1. Show cities\n2. Print neighboring cities\n3. Print Drivers delivering to city\n"))
   if i==1:
-    C.printGraph()
+    C.showCities()
   elif i==2:
     city=input("Enter a city name:")
     if C.searchCity(city):
@@ -150,8 +171,10 @@ def citiesMenu():
 
 # startMenu()
 
-m=AdjacencyMatrix(["Beirut","Saida","Tyre"])
+C=AdjacencyMatrix(["Beirut","Saida","Tyre"])
 #m.printGraph()
-m.addEdge(0,1)
-m.addEdge(1,2)
-m.printGraph()
+C.addEdge(0,1)
+C.addEdge(1,2)
+
+C.addCity("Akkar")
+C.printGraph()
